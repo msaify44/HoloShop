@@ -21,6 +21,3 @@ jobs: # Telling what jobs we need to happen
       #3 Building APK
       - name: Build APK
         run: flutter build apk --release
-      #4 Build IPA ( IOS Build )
-      - name: Build IPA
-        run: flutter build ios --simulator
