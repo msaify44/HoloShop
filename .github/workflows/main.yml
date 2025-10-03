@@ -1,0 +1,23 @@
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs: # Telling what jobs we need to happen
+  build: # Specify the building name and machine
+    name: Build
+    runs-on: self-hosted
+    steps:
+      #1 Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      #2 Install Dependencies
+      - name: Install Dependencies
+        run: flutter pub get
+      #3 Building APK
+      - name: Build APK
+        run: flutter build apk --release
+      #4 Building iOS
+      - name: Build iOS
+        run: flutter build ios --simulator
