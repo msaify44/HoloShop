@@ -3,9 +3,6 @@ on:
     branches:
       - develop
       - main
-  push:
-    branches:
-      - task/HS-1-initial-app-setup
 
 jobs: # Telling what jobs we need to happen
   build: # Specify the building name and machine
