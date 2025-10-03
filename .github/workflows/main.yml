@@ -23,4 +23,4 @@ jobs: # Telling what jobs we need to happen
         run: flutter build apk --release
       #4 Build IPA ( IOS Build )
       - name: Build IPA
-        run: flutter build ipa --no-codesign
+        run: flutter build ios --simulator
