@@ -37,6 +37,15 @@ migrate_working_dir/
 # Generated localization files
 lib/generated/
 
+# Code generation files
+*.g.dart
+*.freezed.dart
+*.mocks.dart
+*.config.dart
+
+# Build runner generated files
+build/
+
 # Symbolication related
 app.*.symbols
 

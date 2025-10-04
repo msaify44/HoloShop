@@ -1,3 +1,5 @@
+import 'package:holo_shop/shared/product/domain/entity/product.dart';
+
 abstract class FetchProductsUseCase {
-  // TODO: Define Use case interface
+  Future<List<Product>> call();
 }
