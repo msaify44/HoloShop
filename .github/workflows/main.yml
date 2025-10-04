@@ -5,21 +5,35 @@ on:
       - main
 
 jobs: # Telling what jobs we need to happen
+  setup:
+    name: Setup
+    runs-on: self-hosted
+    steps:
+      # Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      # Setup
+      - name: Setup
+        run: |
+          flutter pub get
+          dart run build_runner build --delete-conflicting-outputs
+          dart run intl_utils:generate
+
   build: # Specify the building name and machine
     name: Build
     runs-on: self-hosted
     steps:
-      #1 Checkout Repository
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-      #2 Setup
-      - name: Setup
-        run: | 
-          flutter pub get
-          dart run intl_utils:generate
-      #3 Building APK
+      # Building Android
       - name: Build APK
         run: flutter build apk --release
-      #4 Building iOS
+      # Building iOS
       - name: Build iOS
         run: flutter build ios --simulator
+
+  test:
+    name: Test
+    runs-on: self-hosted
+    steps:
+      # Run unit tests
+      - name: Unit Tests
+        run: flutter test
