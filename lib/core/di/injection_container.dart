@@ -1,4 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:holo_shop/features/product_listing/domain/use_cases/fetch_products_use_case.dart';
+import 'package:holo_shop/features/product_listing/domain/use_cases/fetch_products_use_case_impl.dart';
+import 'package:holo_shop/shared/product/data/datasource/remote/product_api_service.dart';
+import 'package:holo_shop/shared/product/data/datasource/remote/product_remote_datasource.dart';
+import 'package:holo_shop/shared/product/data/datasource/remote/product_remote_datasource_impl.dart';
+import 'package:holo_shop/shared/product/data/repository/product_repository_impl.dart';
+import 'package:holo_shop/shared/product/domain/repository/product_repository.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -13,12 +21,35 @@ Future<void> initializeDependencies() async {
 
 /// Initialize core dependencies
 Future<void> _initializeCore() async {
-  // Core dependencies will be added here as needed
+  // Register Dio instance
+  getIt.registerLazySingleton<Dio>(() => Dio());
+  
+  // Register API services
+  getIt.registerLazySingleton<ProductApiService>(
+    () => ProductApiService(getIt<Dio>()),
+  );
+  
+  // Register datasources
+  getIt.registerLazySingleton<ProductRemoteDatasource>(
+    () => ProductRemoteDatasourceImpl(
+      apiService: getIt<ProductApiService>(),
+    ),
+  );
+  
+  // Register repositories
+  getIt.registerLazySingleton<ProductRepository>(
+    () => ProductRepositoryImpl(
+      remoteDatasource: getIt<ProductRemoteDatasource>(),
+    ),
+  );
 }
 
 /// Initialize feature module dependencies
 Future<void> _initializeFeatures() async {
-  // Add feature modules here as they are created
-  // await initializeProfileDependencies(getIt);
-  // await initializeCartDependencies(getIt);
+  // Register use cases
+  getIt.registerLazySingleton<FetchProductsUseCase>(
+    () => FetchProductsUseCaseImpl(
+      repository: getIt<ProductRepository>(),
+    ),
+  );
 }
