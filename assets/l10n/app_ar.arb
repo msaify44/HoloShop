@@ -1,0 +1,16 @@
+{
+  "appTitle": "هولو شوب",
+  "welcome": "مرحباً بك في هولو شوب",
+  "loading": "جاري التحميل...",
+  "error": "خطأ",
+  "retry": "إعادة المحاولة",
+  "searchHint": "البحث عن المنتجات...",
+  "featuredProducts": "المنتجات المميزة",
+  "categories": "الفئات",
+  "productName": "المنتج",
+  "price": "السعر",
+  "categoryName": "الفئة",
+  "viewDetails": "عرض التفاصيل",
+  "addToCart": "تم الإضافة إلى السلة",
+  "settings": "الإعدادات"
+}

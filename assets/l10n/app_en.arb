@@ -1,0 +1,16 @@
+{
+  "appTitle": "HoloShop",
+  "welcome": "Welcome to HoloShop",
+  "loading": "Loading...",
+  "error": "Error",
+  "retry": "Retry",
+  "searchHint": "Search products...",
+  "featuredProducts": "Featured Products",
+  "categories": "Categories",
+  "productName": "Product",
+  "price": "Price",
+  "categoryName": "Category",
+  "viewDetails": "View Details",
+  "addToCart": "Added to Cart",
+  "settings": "Settings"
+}

@@ -12,9 +12,11 @@ jobs: # Telling what jobs we need to happen
       #1 Checkout Repository
       - name: Checkout Repository
         uses: actions/checkout@v3
-      #2 Install Dependencies
-      - name: Install Dependencies
-        run: flutter pub get
+      #2 Setup
+      - name: Setup
+        run: | 
+          flutter pub get
+          dart run intl_utils:generate
       #3 Building APK
       - name: Build APK
         run: flutter build apk --release
