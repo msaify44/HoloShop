@@ -35,7 +35,7 @@ void main() {
         expect(result, isA<List<Product>>());
         expect(result.length, equals(3));
         expect(result[0].id, equals(1));
-        expect(result[0].name, equals('Test Product 1'));
+        expect(result[0].title, equals('Test Product 1'));
         expect(result[0].price, equals(29.99));
         expect(result[0].category, equals('electronics'));
         expect(result[0].image, equals('https://example.com/image1.jpg'));
@@ -83,7 +83,7 @@ void main() {
         // Assert
         expect(result.length, equals(1));
         expect(result[0].image, isNull);
-        expect(result[0].name, equals('Test Product 3'));
+        expect(result[0].title, equals('Test Product 3'));
 
         verify(mockRemoteDatasource.fetchProducts()).called(1);
       });
@@ -102,7 +102,7 @@ void main() {
         // Assert
         expect(result, isA<Product>());
         expect(result.id, equals(1));
-        expect(result.name, equals('Test Product 1'));
+        expect(result.title, equals('Test Product 1'));
         expect(result.price, equals(29.99));
         expect(result.category, equals('electronics'));
         expect(result.image, equals('https://example.com/image1.jpg'));
@@ -122,7 +122,7 @@ void main() {
         // Assert
         expect(result, isA<Product>());
         expect(result.id, equals(3));
-        expect(result.name, equals('Test Product 3'));
+        expect(result.title, equals('Test Product 3'));
         expect(result.image, isNull);
 
         verify(mockRemoteDatasource.fetchProductDetails(productId)).called(1);
@@ -156,9 +156,9 @@ void main() {
 
         // Assert
         expect(result1.id, equals(1));
-        expect(result1.name, equals('Test Product 1'));
+        expect(result1.title, equals('Test Product 1'));
         expect(result2.id, equals(2));
-        expect(result2.name, equals('Test Product 2'));
+        expect(result2.title, equals('Test Product 2'));
 
         verify(mockRemoteDatasource.fetchProductDetails(1)).called(1);
         verify(mockRemoteDatasource.fetchProductDetails(2)).called(1);

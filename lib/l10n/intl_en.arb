@@ -1,3 +1,15 @@
 {
-  "appTitle": "HoloShop"
+  "appTitle": "HoloShop",
+  "ecommerceStore": "E-Commerce Store",
+  "viewCart": "View Cart",
+  "noProductsAvailable": "No products available",
+  "retry": "Retry",
+  "error": "Error: {message}",
+  "@error": {
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  }
 }

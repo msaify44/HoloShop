@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:holo_shop/core/di/injection_container.dart';
 import 'package:holo_shop/features/product_listing/presentation/widgets/products_listing_screen.dart';
-import 'package:holo_shop/generated/l10n/app_localizations.dart';
 
 import 'generated/l10n.dart';
 
@@ -20,13 +19,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: S.of(context).appTitle,
+      title: 'HoloShop',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: const [S.delegate],
+      supportedLocales: S.delegate.supportedLocales,
       home: const ProductsListingScreen(),
     );
   }
