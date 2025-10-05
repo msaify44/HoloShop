@@ -9,7 +9,7 @@ class Product with _$Product {
 
   const factory Product({
     required int id,
-    required String name,
+    required String title,
     required String description,
     required double price,
     required String category,
@@ -20,7 +20,7 @@ class Product with _$Product {
   factory Product.fromDto(ProductDto dto) {
     return Product(
       id: dto.id,
-      name: dto.name,
+      title: dto.title,
       description: dto.description,
       price: dto.price,
       category: dto.category,

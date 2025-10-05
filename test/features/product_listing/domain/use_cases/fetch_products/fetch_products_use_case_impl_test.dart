@@ -1,12 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:holo_shop/features/product_listing/domain/use_cases/fetch_products_use_case_impl.dart';
+import 'package:holo_shop/features/product_listing/domain/use_cases/fetch_products/fetch_products_use_case_impl.dart';
 import 'package:holo_shop/shared/product/domain/entity/product.dart';
 import 'package:holo_shop/shared/product/domain/repository/product_repository.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../fixtures/test_fixtures.dart';
-import '../../../../mocks/mocks.mocks.dart';
+import '../../../../../fixtures/test_fixtures.dart';
+import '../../../../../mocks/mocks.mocks.dart';
 
 @GenerateMocks([ProductRepository])
 void main() {
@@ -34,7 +34,7 @@ void main() {
         expect(result, isA<List<Product>>());
         expect(result.length, equals(3));
         expect(result[0].id, equals(1));
-        expect(result[0].name, equals('Test Product 1'));
+        expect(result[0].title, equals('Test Product 1'));
         expect(result[0].price, equals(29.99));
         expect(result[0].category, equals('electronics'));
         expect(result[0].image, equals('https://example.com/image1.jpg'));
@@ -82,7 +82,7 @@ void main() {
         // Assert
         expect(result.length, equals(1));
         expect(result[0].image, isNull);
-        expect(result[0].name, equals('Test Product 3'));
+        expect(result[0].title, equals('Test Product 3'));
 
         verify(mockRepository.fetchProducts()).called(1);
       });
@@ -98,7 +98,7 @@ void main() {
         // Assert
         expect(result.length, equals(1));
         expect(result[0].id, equals(1));
-        expect(result[0].name, equals('Test Product 1'));
+        expect(result[0].title, equals('Test Product 1'));
 
         verify(mockRepository.fetchProducts()).called(1);
       });

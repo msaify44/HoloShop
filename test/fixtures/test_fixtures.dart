@@ -4,7 +4,7 @@ import 'package:holo_shop/shared/product/domain/entity/product.dart';
 class TestFixtures {
   static const ProductDto sampleProductDto1 = ProductDto(
     id: 1,
-    name: 'Test Product 1',
+    title: 'Test Product 1',
     description: 'This is a test product description',
     price: 29.99,
     category: 'electronics',
@@ -13,7 +13,7 @@ class TestFixtures {
 
   static const ProductDto sampleProductDto2 = ProductDto(
     id: 2,
-    name: 'Test Product 2',
+    title: 'Test Product 2',
     description: 'Another test product description',
     price: 49.99,
     category: 'clothing',
@@ -22,7 +22,7 @@ class TestFixtures {
 
   static const ProductDto sampleProductDtoWithoutImage = ProductDto(
     id: 3,
-    name: 'Test Product 3',
+    title: 'Test Product 3',
     description: 'Test product without image',
     price: 19.99,
     category: 'books',
@@ -31,7 +31,7 @@ class TestFixtures {
 
   static const Product sampleProduct1 = Product(
     id: 1,
-    name: 'Test Product 1',
+    title: 'Test Product 1',
     description: 'This is a test product description',
     price: 29.99,
     category: 'electronics',
@@ -40,7 +40,7 @@ class TestFixtures {
 
   static const Product sampleProduct2 = Product(
     id: 2,
-    name: 'Test Product 2',
+    title: 'Test Product 2',
     description: 'Another test product description',
     price: 49.99,
     category: 'clothing',
@@ -49,7 +49,7 @@ class TestFixtures {
 
   static const Product sampleProductWithoutImage = Product(
     id: 3,
-    name: 'Test Product 3',
+    title: 'Test Product 3',
     description: 'Test product without image',
     price: 19.99,
     category: 'books',

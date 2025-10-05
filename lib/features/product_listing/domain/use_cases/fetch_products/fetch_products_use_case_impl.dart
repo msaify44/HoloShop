@@ -1,4 +1,4 @@
-import 'package:holo_shop/features/product_listing/domain/use_cases/fetch_products_use_case.dart';
+import 'package:holo_shop/features/product_listing/domain/use_cases/fetch_products/fetch_products_use_case.dart';
 import 'package:holo_shop/shared/product/domain/entity/product.dart';
 import 'package:holo_shop/shared/product/domain/repository/product_repository.dart';
 

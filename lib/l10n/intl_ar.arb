@@ -1,3 +1,15 @@
 {
-  "appTitle": "هولو شوب"
+  "appTitle": "هولو شوب",
+  "ecommerceStore": "متجر التجارة الإلكترونية",
+  "viewCart": "عرض السلة",
+  "noProductsAvailable": "لا توجد منتجات متاحة",
+  "retry": "إعادة المحاولة",
+  "error": "خطأ: {message}",
+  "@error": {
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  }
 }

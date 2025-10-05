@@ -1,7 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:holo_shop/features/product_listing/domain/use_cases/fetch_products_use_case.dart';
-import 'package:holo_shop/features/product_listing/domain/use_cases/fetch_products_use_case_impl.dart';
+import 'package:holo_shop/features/product_listing/domain/use_cases/fetch_products/fetch_products_use_case.dart';
+import 'package:holo_shop/features/product_listing/domain/use_cases/fetch_products/fetch_products_use_case_impl.dart';
+import 'package:holo_shop/features/product_listing/domain/use_cases/get_categories/get_categories_use_case.dart';
+import 'package:holo_shop/features/product_listing/domain/use_cases/get_categories/get_categories_use_case_impl.dart';
+import 'package:holo_shop/features/product_listing/domain/use_cases/filter_products/filter_products_use_case.dart';
+import 'package:holo_shop/features/product_listing/domain/use_cases/filter_products/filter_products_use_case_impl.dart';
+import 'package:holo_shop/features/product_listing/presentation/bloc/product_listing_bloc.dart';
 import 'package:holo_shop/shared/product/data/datasource/remote/product_api_service.dart';
 import 'package:holo_shop/shared/product/data/datasource/remote/product_remote_datasource.dart';
 import 'package:holo_shop/shared/product/data/datasource/remote/product_remote_datasource_impl.dart';
@@ -50,6 +55,23 @@ Future<void> _initializeFeatures() async {
   getIt.registerLazySingleton<FetchProductsUseCase>(
     () => FetchProductsUseCaseImpl(
       repository: getIt<ProductRepository>(),
+    ),
+  );
+  
+  getIt.registerLazySingleton<GetCategoriesUseCase>(
+    () => GetCategoriesUseCaseImpl(),
+  );
+  
+  getIt.registerLazySingleton<FilterProductsUseCase>(
+    () => FilterProductsUseCaseImpl(),
+  );
+  
+  // Register BLoCs
+  getIt.registerFactory<ProductListingBloc>(
+    () => ProductListingBloc(
+      fetchProductsUseCase: getIt<FetchProductsUseCase>(),
+      getCategoriesUseCase: getIt<GetCategoriesUseCase>(),
+      filterProductsUseCase: getIt<FilterProductsUseCase>(),
     ),
   );
 }
