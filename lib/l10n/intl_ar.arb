@@ -11,5 +11,9 @@
         "type": "String"
       }
     }
-  }
+  },
+  "all": "الكل",
+  "productDetailsErrorTitle": "حدث خطأ أثناء تحميل المنتج",
+  "addToCart": "أضف إلى السلة",
+  "addedToCart": "تمت الإضافة إلى السلة"
 }

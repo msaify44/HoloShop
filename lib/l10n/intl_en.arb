@@ -11,5 +11,9 @@
         "type": "String"
       }
     }
-  }
+  },
+  "all": "All",
+  "productDetailsErrorTitle": "Error loading product",
+  "addToCart": "Add to Cart",
+  "addedToCart": "Added to cart"
 }

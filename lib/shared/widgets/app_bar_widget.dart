@@ -4,7 +4,9 @@ import 'package:holo_shop/core/design_system/atoms/dimensions.dart';
 import '../../generated/l10n.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarWidget({super.key});
+  final bool showBackButton;
+
+  const AppBarWidget({super.key, this.showBackButton = false});
 
   @override
   Widget build(BuildContext context) {
@@ -20,22 +22,32 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           children: [
             Row(
               children: [
-                Container(
-                  width: Dimensions.dp24,
-                  height: Dimensions.dp24,
-                  decoration: BoxDecoration(
-                    border: Border.all(
+                if (showBackButton)
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).maybePop(),
+                    child: const Icon(
+                      Icons.arrow_back,
+                      size: 24,
                       color: Colors.black,
-                      width: Dimensions.dp2,
                     ),
-                    borderRadius: BorderRadius.circular(Dimensions.dp4),
+                  )
+                else
+                  Container(
+                    width: Dimensions.dp24,
+                    height: Dimensions.dp24,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black,
+                        width: Dimensions.dp2,
+                      ),
+                      borderRadius: BorderRadius.circular(Dimensions.dp4),
+                    ),
+                    child: const Icon(
+                      Icons.inventory_2_outlined,
+                      size: 16,
+                      color: Colors.black,
+                    ),
                   ),
-                  child: const Icon(
-                    Icons.inventory_2_outlined,
-                    size: 16,
-                    color: Colors.black,
-                  ),
-                ),
                 const SizedBox(width: Dimensions.dp8),
                 Text(
                   S.of(context).appTitle,

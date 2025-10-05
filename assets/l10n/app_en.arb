@@ -12,5 +12,9 @@
   "categoryName": "Category",
   "viewDetails": "View Details",
   "addToCart": "Added to Cart",
-  "settings": "Settings"
+  "settings": "Settings",
+  "viewCart": "View Cart",
+  "backToProducts": "Back to Products",
+  "productDescription": "Product Description",
+  "errorLoadingProduct": "Error loading product"
 }
