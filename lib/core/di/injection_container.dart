@@ -7,6 +7,9 @@ import 'package:holo_shop/features/product_listing/domain/use_cases/get_categori
 import 'package:holo_shop/features/product_listing/domain/use_cases/filter_products/filter_products_use_case.dart';
 import 'package:holo_shop/features/product_listing/domain/use_cases/filter_products/filter_products_use_case_impl.dart';
 import 'package:holo_shop/features/product_listing/presentation/bloc/product_listing_bloc.dart';
+import 'package:holo_shop/features/product_details/domain/use_cases/fetch_product_details/fetch_product_details_use_case.dart';
+import 'package:holo_shop/features/product_details/domain/use_cases/fetch_product_details/fetch_product_details_use_case_impl.dart';
+import 'package:holo_shop/features/product_details/presentation/bloc/product_details_bloc.dart';
 import 'package:holo_shop/shared/product/data/datasource/remote/product_api_service.dart';
 import 'package:holo_shop/shared/product/data/datasource/remote/product_remote_datasource.dart';
 import 'package:holo_shop/shared/product/data/datasource/remote/product_remote_datasource_impl.dart';
@@ -66,12 +69,24 @@ Future<void> _initializeFeatures() async {
     () => FilterProductsUseCaseImpl(),
   );
   
+  getIt.registerLazySingleton<FetchProductDetailsUseCase>(
+    () => FetchProductDetailsUseCaseImpl(
+      repository: getIt<ProductRepository>(),
+    ),
+  );
+  
   // Register BLoCs
   getIt.registerFactory<ProductListingBloc>(
     () => ProductListingBloc(
       fetchProductsUseCase: getIt<FetchProductsUseCase>(),
       getCategoriesUseCase: getIt<GetCategoriesUseCase>(),
       filterProductsUseCase: getIt<FilterProductsUseCase>(),
+    ),
+  );
+  
+  getIt.registerFactory<ProductDetailsBloc>(
+    () => ProductDetailsBloc(
+      fetchProductDetailsUseCase: getIt<FetchProductDetailsUseCase>(),
     ),
   );
 }

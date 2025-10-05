@@ -54,7 +54,7 @@ class ProductTileWidget extends StatelessWidget {
                       ),
                       child: Image.network(
                         product.image!,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fitHeight,
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
                             decoration: BoxDecoration(

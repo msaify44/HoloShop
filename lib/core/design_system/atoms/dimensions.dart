@@ -33,6 +33,7 @@ class Dimensions {
   static const double dp52 = 52.0;
   static const double dp56 = 56.0;
   static const double dp60 = 60.0;
+  static const double dp64 = 64.0;
   static const double dp66 = 66.0;
   static const double dp67 = 67.0;
   static const double dp72 = 72.0;

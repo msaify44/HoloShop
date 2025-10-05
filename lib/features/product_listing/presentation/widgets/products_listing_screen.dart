@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:holo_shop/core/di/injection_container.dart';
+import 'package:holo_shop/features/product_details/presentation/widgets/product_details_screen.dart';
 import 'package:holo_shop/features/product_listing/presentation/bloc/product_listing_bloc.dart';
 import 'package:holo_shop/features/product_listing/presentation/bloc/product_listing_event.dart';
 import 'package:holo_shop/features/product_listing/presentation/bloc/product_listing_state.dart';
@@ -53,7 +54,15 @@ class _ProductsListingView extends StatelessWidget {
                   Expanded(
                     child: ProductListLoadedWidget(
                       products: filteredProducts,
-                      onProductTap: (_) => (),
+                      onProductTap: (product) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ProductDetailsScreen(
+                              productId: product.id,
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],

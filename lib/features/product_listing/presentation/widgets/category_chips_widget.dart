@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:holo_shop/generated/l10n.dart';
 import 'package:holo_shop/features/product_listing/domain/entity/category.dart';
 import '../../../../core/design_system/atoms/dimensions.dart';
 
@@ -84,7 +85,7 @@ class _CategoryChip extends StatelessWidget {
           ),
         ),
         child: Text(
-          category.title,
+          category.id.isEmpty ? S.of(context).all : category.title,
           style: TextStyle(
             color: isSelected ? Colors.white : Colors.grey[700],
             fontSize: 14,
