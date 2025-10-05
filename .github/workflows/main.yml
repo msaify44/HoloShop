@@ -22,6 +22,7 @@ jobs: # Telling what jobs we need to happen
   build: # Specify the building name and machine
     name: Build
     runs-on: self-hosted
+    needs: setup
     steps:
       # Building Android
       - name: Build APK
@@ -33,6 +34,7 @@ jobs: # Telling what jobs we need to happen
   test:
     name: Test
     runs-on: self-hosted
+    needs: setup
     steps:
       # Run unit tests
       - name: Unit Tests
