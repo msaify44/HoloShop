@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:holo_shop/core/di/injection_container.dart';
+import 'package:holo_shop/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:holo_shop/features/product_listing/presentation/widgets/products_listing_screen.dart';
 
 import 'generated/l10n.dart';
@@ -18,15 +20,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      onGenerateTitle: (context) => S.of(context).appTitle,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return BlocProvider.value(
+      value: getIt<CartBloc>(),
+      child: MaterialApp(
+        onGenerateTitle: (context) => S.of(context).appTitle,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        localizationsDelegates: const [S.delegate],
+        supportedLocales: S.delegate.supportedLocales,
+        home: const ProductsListingScreen(),
       ),
-      localizationsDelegates: const [S.delegate],
-      supportedLocales: S.delegate.supportedLocales,
-      home: const ProductsListingScreen(),
     );
   }
 }

@@ -15,6 +15,9 @@ import 'package:holo_shop/shared/product/data/datasource/remote/product_remote_d
 import 'package:holo_shop/shared/product/data/datasource/remote/product_remote_datasource_impl.dart';
 import 'package:holo_shop/shared/product/data/repository/product_repository_impl.dart';
 import 'package:holo_shop/shared/product/domain/repository/product_repository.dart';
+import 'package:holo_shop/features/cart/presentation/bloc/cart_bloc.dart';
+import 'package:holo_shop/features/cart/domain/use_cases/calculate_cart_price/calculate_cart_price_use_case.dart';
+import 'package:holo_shop/features/cart/domain/use_cases/calculate_cart_price/calculate_cart_price_use_case_impl.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -87,6 +90,17 @@ Future<void> _initializeFeatures() async {
   getIt.registerFactory<ProductDetailsBloc>(
     () => ProductDetailsBloc(
       fetchProductDetailsUseCase: getIt<FetchProductDetailsUseCase>(),
+    ),
+  );
+
+  // Cart
+  getIt.registerLazySingleton<CalculateCartPriceUseCase>(
+    () => CalculateCartPriceUseCaseImpl(),
+  );
+  
+  getIt.registerLazySingleton<CartBloc>(
+    () => CartBloc(
+      calculateCartPriceUseCase: getIt<CalculateCartPriceUseCase>(),
     ),
   );
 }
