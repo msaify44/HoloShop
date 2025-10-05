@@ -23,7 +23,7 @@ class ProductDetailsScreen extends StatelessWidget {
       create: (context) =>
           getIt<ProductDetailsBloc>()
             ..add(ProductDetailsEvent.fetchProductDetails(productId)),
-      child: Scaffold(
+        child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBarWidget(showBackButton: true),
         body: BlocBuilder<ProductDetailsBloc, ProductDetailsState>(
@@ -35,7 +35,7 @@ class ProductDetailsScreen extends StatelessWidget {
             );
           },
         ),
-        bottomNavigationBar: AddToCartFooter(),
+          bottomNavigationBar: AddToCartFooter(),
       ),
     );
   }
