@@ -4,22 +4,48 @@ import 'package:holo_shop/features/cart/presentation/bloc/cart_state.dart';
 import 'package:holo_shop/features/cart/domain/entity/cart_item.dart';
 import 'package:holo_shop/features/cart/domain/entity/cart.dart';
 import 'package:holo_shop/features/cart/domain/use_cases/calculate_cart_price/calculate_cart_price_use_case.dart';
+import 'package:holo_shop/features/cart/domain/repository/cart_repository.dart';
 import 'package:holo_shop/shared/product/domain/entity/product.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
   final CalculateCartPriceUseCase _calculateCartPriceUseCase;
+  final CartRepository _cartRepository;
 
-  CartBloc({required CalculateCartPriceUseCase calculateCartPriceUseCase})
-    : _calculateCartPriceUseCase = calculateCartPriceUseCase,
-      super(const CartState.empty()) {
+  CartBloc({
+    required CalculateCartPriceUseCase calculateCartPriceUseCase,
+    required CartRepository cartRepository,
+  }) : _calculateCartPriceUseCase = calculateCartPriceUseCase,
+       _cartRepository = cartRepository,
+       super(const CartState.empty()) {
     on<CartEvent>((event, emit) {
       event.when(
         addToCart: (product) => _handleAddToCart(product, emit),
         decrementItem: (productId) => _handleDecrementItem(productId, emit),
         removeFromCart: (productId) => _handleRemoveFromCart(productId, emit),
         clearCart: () => _handleClearCart(emit),
+        loadFromCache: (cart) => _handleLoadFromCache(cart, emit),
       );
     });
+    
+    // Load cart from cache on initialization
+    _loadCartFromCache();
+  }
+
+  /// Load cart data from cache
+  Future<void> _loadCartFromCache() async {
+    final cachedCart = await _cartRepository.loadCart();
+    if (cachedCart != null && cachedCart.items.isNotEmpty) {
+      add(CartEvent.loadFromCache(cachedCart));
+    }
+  }
+
+  /// Save cart data to cache
+  Future<void> _saveCartToCache(Cart cart) async {
+    await _cartRepository.saveCart(cart);
+  }
+
+  void _handleLoadFromCache(Cart cart, Emitter<CartState> emit) {
+    emit(CartState.loaded(cart: cart));
   }
 
   void _handleAddToCart(Product product, Emitter<CartState> emit) {
@@ -39,6 +65,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     final price = _calculateCartPriceUseCase(currentItems);
     final cart = Cart(items: currentItems, price: price);
     emit(CartState.loaded(cart: cart));
+    _saveCartToCache(cart);
   }
 
   void _handleDecrementItem(int productId, Emitter<CartState> emit) {
@@ -54,14 +81,17 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             final price = _calculateCartPriceUseCase(updated);
             final newCart = Cart(items: updated, price: price);
             emit(CartState.loaded(cart: newCart));
+            _saveCartToCache(newCart);
           } else {
             updated.removeAt(index);
             if (updated.isEmpty) {
               emit(const CartState.empty());
+              _cartRepository.clearCart();
             } else {
               final price = _calculateCartPriceUseCase(updated);
               final newCart = Cart(items: updated, price: price);
               emit(CartState.loaded(cart: newCart));
+              _saveCartToCache(newCart);
             }
           }
         }
@@ -78,10 +108,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             .toList();
         if (updated.isEmpty) {
           emit(const CartState.empty());
+          _cartRepository.clearCart();
         } else {
           final price = _calculateCartPriceUseCase(updated);
           final newCart = Cart(items: updated, price: price);
           emit(CartState.loaded(cart: newCart));
+          _saveCartToCache(newCart);
         }
       },
       orElse: () {},
@@ -90,5 +122,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
   void _handleClearCart(Emitter<CartState> emit) {
     emit(const CartState.empty());
+    _cartRepository.clearCart();
   }
 }

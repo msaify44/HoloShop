@@ -8,8 +8,6 @@ import 'package:holo_shop/features/cart/domain/entity/cart_price.dart';
 import 'package:holo_shop/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:holo_shop/features/cart/presentation/bloc/cart_event.dart';
 import 'package:holo_shop/features/cart/presentation/bloc/cart_state.dart';
-import 'package:holo_shop/features/cart/domain/use_cases/calculate_cart_price/calculate_cart_price_use_case.dart';
-import 'package:holo_shop/shared/product/domain/entity/product.dart';
 
 import '../../../../fixtures/test_fixtures.dart';
 import '../../../../mocks/mocks.mocks.dart';
@@ -17,10 +15,21 @@ import '../../../../mocks/mocks.mocks.dart';
 void main() {
   late CartBloc bloc;
   late MockCalculateCartPriceUseCase mockCalculateCartPriceUseCase;
+  late MockCartRepository mockCartRepository;
 
   setUp(() {
     mockCalculateCartPriceUseCase = MockCalculateCartPriceUseCase();
-    bloc = CartBloc(calculateCartPriceUseCase: mockCalculateCartPriceUseCase);
+    mockCartRepository = MockCartRepository();
+    
+    // Mock repository methods to return successful futures
+    when(mockCartRepository.saveCart(any)).thenAnswer((_) async {});
+    when(mockCartRepository.loadCart()).thenAnswer((_) async => null);
+    when(mockCartRepository.clearCart()).thenAnswer((_) async {});
+    
+    bloc = CartBloc(
+      calculateCartPriceUseCase: mockCalculateCartPriceUseCase,
+      cartRepository: mockCartRepository,
+    );
   });
 
   tearDown(() {
@@ -60,6 +69,7 @@ void main() {
         ],
         verify: (_) {
           verify(mockCalculateCartPriceUseCase.call(any)).called(1);
+          verify(mockCartRepository.saveCart(any)).called(1);
         },
       );
 
@@ -113,6 +123,7 @@ void main() {
         ],
         verify: (_) {
           verify(mockCalculateCartPriceUseCase.call(any)).called(2);
+          verify(mockCartRepository.saveCart(any)).called(2);
         },
       );
 
@@ -169,6 +180,7 @@ void main() {
         ],
         verify: (_) {
           verify(mockCalculateCartPriceUseCase.call(any)).called(2);
+          verify(mockCartRepository.saveCart(any)).called(2);
         },
       );
     });
@@ -248,6 +260,7 @@ void main() {
         ],
         verify: (_) {
           verify(mockCalculateCartPriceUseCase.call(any)).called(3);
+          verify(mockCartRepository.saveCart(any)).called(3);
         },
       );
     });
@@ -308,7 +321,39 @@ void main() {
         ],
         verify: (_) {
           verify(mockCalculateCartPriceUseCase.call(any)).called(2);
+          verify(mockCartRepository.saveCart(any)).called(2);
+          verify(mockCartRepository.clearCart()).called(1);
         },
+      );
+    });
+
+    group('LoadFromCache', () {
+      blocTest<CartBloc, CartState>(
+        'loads cart from cache',
+        build: () => bloc,
+        act: (bloc) {
+          final cachedCart = Cart(
+            items: [CartItem(product: TestFixtures.sampleProduct1, quantity: 2)],
+            price: const CartPrice(
+              subtotal: 59.98,
+              tax: 4.80,
+              total: 64.78,
+            ),
+          );
+          bloc.add(CartEvent.loadFromCache(cachedCart));
+        },
+        expect: () => [
+          CartState.loaded(
+            cart: Cart(
+              items: [CartItem(product: TestFixtures.sampleProduct1, quantity: 2)],
+              price: const CartPrice(
+                subtotal: 59.98,
+                tax: 4.80,
+                total: 64.78,
+              ),
+            ),
+          ),
+        ],
       );
     });
   });
