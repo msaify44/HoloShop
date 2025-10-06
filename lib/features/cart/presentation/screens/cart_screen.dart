@@ -19,15 +19,21 @@ class CartScreen extends StatelessWidget {
       body: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
           return state.when(
-            empty: () => _buildEmptyCart(context),
-            loaded: (cart) => _buildCartContent(context, cart),
+            empty: () => _EmptyCartWidget(),
+            loaded: (cart) => _CartContentWidget(cart: cart),
           );
         },
       ),
     );
   }
 
-  Widget _buildEmptyCart(BuildContext context) {
+}
+
+class _EmptyCartWidget extends StatelessWidget {
+  const _EmptyCartWidget();
+
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -57,15 +63,22 @@ class CartScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildCartContent(BuildContext context, cart) {
+class _CartContentWidget extends StatelessWidget {
+  final dynamic cart;
+
+  const _CartContentWidget({required this.cart});
+
+  @override
+  Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(Dimensions.dp16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Continue Shopping button
-          _buildContinueShopping(context),
+          const _ContinueShoppingWidget(),
           const SizedBox(height: Dimensions.dp24),
 
           // Shopping Cart heading
@@ -94,8 +107,13 @@ class CartScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildContinueShopping(BuildContext context) {
+class _ContinueShoppingWidget extends StatelessWidget {
+  const _ContinueShoppingWidget();
+
+  @override
+  Widget build(BuildContext context) {
     return InkWell(
       onTap: () => Navigator.of(context).pop(),
       child: Row(
