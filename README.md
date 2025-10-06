@@ -2,6 +2,14 @@
 
 A modern Flutter e-commerce application built with clean architecture principles, featuring product listing, product details, cart management, and localization support.
 
+## 📱 App Demo
+
+Check out HoloShop in action:
+
+[![HoloShop Demo](https://img.youtube.com/vi/Cy-26X7UrcE/maxresdefault.jpg)](https://youtube.com/shorts/Cy-26X7UrcE?feature=share)
+
+*Click the image above to watch the demo video*
+
 ## 🏗️ Architecture Overview
 
 ### Clean Architecture Implementation
