@@ -6,8 +6,13 @@ import '../../generated/l10n.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final bool showBackButton;
+  final bool showViewCartButton;
 
-  const AppBarWidget({super.key, this.showBackButton = false});
+  const AppBarWidget({
+    super.key,
+    this.showBackButton = false,
+    this.showViewCartButton = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +65,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ],
             ),
-            ViewCartButton(),
+            if (showViewCartButton) ViewCartButton(),
           ],
         ),
       ),

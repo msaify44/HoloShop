@@ -15,5 +15,15 @@
   "all": "All",
   "productDetailsErrorTitle": "Error loading product",
   "addToCart": "Add to Cart",
-  "addedToCart": "Added to cart"
+  "addedToCart": "Added to cart",
+  "cartEmpty": "Your cart is empty",
+  "continueShopping": "Continue Shopping",
+  "shoppingCart": "Shopping Cart",
+  "orderSummary": "Order Summary",
+  "subtotal": "Subtotal",
+  "shipping": "Shipping",
+  "free": "Free",
+  "total": "Total",
+  "proceedToCheckout": "Proceed to Checkout",
+  "checkoutNotImplemented": "Checkout functionality not implemented yet"
 }

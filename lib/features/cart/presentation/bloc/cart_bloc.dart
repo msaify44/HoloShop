@@ -3,7 +3,6 @@ import 'package:holo_shop/features/cart/presentation/bloc/cart_event.dart';
 import 'package:holo_shop/features/cart/presentation/bloc/cart_state.dart';
 import 'package:holo_shop/features/cart/domain/entity/cart_item.dart';
 import 'package:holo_shop/features/cart/domain/entity/cart.dart';
-import 'package:holo_shop/features/cart/domain/entity/cart_price.dart';
 import 'package:holo_shop/features/cart/domain/use_cases/calculate_cart_price/calculate_cart_price_use_case.dart';
 import 'package:holo_shop/shared/product/domain/entity/product.dart';
 

@@ -15,5 +15,15 @@
   "all": "الكل",
   "productDetailsErrorTitle": "حدث خطأ أثناء تحميل المنتج",
   "addToCart": "أضف إلى السلة",
-  "addedToCart": "تمت الإضافة إلى السلة"
+  "addedToCart": "تمت الإضافة إلى السلة",
+  "cartEmpty": "سلة التسوق فارغة",
+  "continueShopping": "متابعة التسوق",
+  "shoppingCart": "سلة التسوق",
+  "orderSummary": "ملخص الطلب",
+  "subtotal": "المجموع الفرعي",
+  "shipping": "الشحن",
+  "free": "مجاني",
+  "total": "المجموع",
+  "proceedToCheckout": "المتابعة للدفع",
+  "checkoutNotImplemented": "وظيفة الدفع غير مطبقة بعد"
 }
