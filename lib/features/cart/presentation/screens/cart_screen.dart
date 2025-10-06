@@ -77,10 +77,6 @@ class _CartContentWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Continue Shopping button
-          const _ContinueShoppingWidget(),
-          const SizedBox(height: Dimensions.dp24),
-
           // Shopping Cart heading
           Text(
             S.of(context).shoppingCart,
@@ -103,36 +99,6 @@ class _CartContentWidget extends StatelessWidget {
 
           // Order Summary
           CartSummaryWidget(cart: cart),
-        ],
-      ),
-    );
-  }
-}
-
-class _ContinueShoppingWidget extends StatelessWidget {
-  const _ContinueShoppingWidget();
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => Navigator.of(context).pop(),
-      child: Row(
-        children: [
-          Icon(
-            Directionality.of(context) == TextDirection.rtl 
-                ? Icons.arrow_forward_ios 
-                : Icons.arrow_back_ios,
-            color: Colors.black, 
-            size: 20,
-          ),
-          const SizedBox(width: Dimensions.dp8),
-          Text(
-            S.of(context).continueShopping,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: Colors.black,
-              decoration: TextDecoration.underline,
-            ),
-          ),
         ],
       ),
     );

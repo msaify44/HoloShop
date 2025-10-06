@@ -18,6 +18,10 @@ import 'package:holo_shop/shared/product/domain/repository/product_repository.da
 import 'package:holo_shop/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:holo_shop/features/cart/domain/use_cases/calculate_cart_price/calculate_cart_price_use_case.dart';
 import 'package:holo_shop/features/cart/domain/use_cases/calculate_cart_price/calculate_cart_price_use_case_impl.dart';
+import 'package:holo_shop/features/cart/data/datasource/cart_local_datasource.dart';
+import 'package:holo_shop/features/cart/data/datasource/cart_local_datasource_impl.dart';
+import 'package:holo_shop/features/cart/domain/repository/cart_repository.dart';
+import 'package:holo_shop/features/cart/data/repository/cart_repository_impl.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -51,6 +55,18 @@ Future<void> _initializeCore() async {
   getIt.registerLazySingleton<ProductRepository>(
     () => ProductRepositoryImpl(
       remoteDatasource: getIt<ProductRemoteDatasource>(),
+    ),
+  );
+  
+  // Register cart datasource
+  getIt.registerLazySingleton<CartLocalDatasource>(
+    () => CartLocalDatasourceImpl(),
+  );
+  
+  // Register cart repository
+  getIt.registerLazySingleton<CartRepository>(
+    () => CartRepositoryImpl(
+      cartLocalDatasource: getIt<CartLocalDatasource>(),
     ),
   );
 }
@@ -101,6 +117,7 @@ Future<void> _initializeFeatures() async {
   getIt.registerLazySingleton<CartBloc>(
     () => CartBloc(
       calculateCartPriceUseCase: getIt<CalculateCartPriceUseCase>(),
+      cartRepository: getIt<CartRepository>(),
     ),
   );
 }

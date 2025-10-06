@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:holo_shop/shared/product/data/models/product_dto.dart';
 
 part 'product.freezed.dart';
+part 'product.g.dart';
 
 @freezed
 class Product with _$Product {
@@ -15,6 +16,8 @@ class Product with _$Product {
     required String category,
     String? image,
   }) = _Product;
+
+  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
 
   /// Creates a Product from a ProductDto
   factory Product.fromDto(ProductDto dto) {

@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:holo_shop/shared/product/domain/entity/product.dart';
 
 part 'cart_item.freezed.dart';
+part 'cart_item.g.dart';
 
 @freezed
 class CartItem with _$CartItem {
@@ -9,6 +10,8 @@ class CartItem with _$CartItem {
     required Product product,
     @Default(1) int quantity,
   }) = _CartItem;
+
+  factory CartItem.fromJson(Map<String, dynamic> json) => _$CartItemFromJson(json);
 }
 
 
