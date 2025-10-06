@@ -14,7 +14,12 @@ import 'package:holo_shop/shared/widgets/app_bar_widget.dart';
 
 
 class ProductsListingScreen extends StatelessWidget {
-  const ProductsListingScreen({super.key});
+  final Function(Locale)? onLanguageChanged;
+  
+  const ProductsListingScreen({
+    super.key,
+    this.onLanguageChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,19 +27,21 @@ class ProductsListingScreen extends StatelessWidget {
       create: (context) =>
           getIt<ProductListingBloc>()
             ..add(const ProductListingEvent.fetchProducts()),
-      child: const _ProductsListingView(),
+      child: _ProductsListingView(onLanguageChanged: onLanguageChanged),
     );
   }
 }
 
 class _ProductsListingView extends StatelessWidget {
-  const _ProductsListingView();
+  final Function(Locale)? onLanguageChanged;
+  
+  const _ProductsListingView({this.onLanguageChanged});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBarWidget(),
+      appBar: AppBarWidget(onLanguageChanged: onLanguageChanged),
       body: SafeArea(
         child: BlocBuilder<ProductListingBloc, ProductListingState>(
           builder: (context, state) {

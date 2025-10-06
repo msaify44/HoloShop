@@ -100,7 +100,13 @@ class CartScreen extends StatelessWidget {
       onTap: () => Navigator.of(context).pop(),
       child: Row(
         children: [
-          Icon(Icons.inventory_2, color: Colors.black, size: 20),
+          Icon(
+            Directionality.of(context) == TextDirection.rtl 
+                ? Icons.arrow_forward_ios 
+                : Icons.arrow_back_ios,
+            color: Colors.black, 
+            size: 20,
+          ),
           const SizedBox(width: Dimensions.dp8),
           Text(
             S.of(context).continueShopping,
