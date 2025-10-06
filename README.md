@@ -240,7 +240,6 @@ CartBloc → CartRepository → CartLocalDatasource → SharedPreferences
 ```
 
 ## ⚡ Performance Considerations
-
 ### 1. **Lazy Loading**
 - Use cases registered as `LazySingleton`
 - BLoCs registered as `Factory` for memory efficiency
@@ -291,7 +290,14 @@ CartBloc → CartRepository → CartLocalDatasource → SharedPreferences
 - Consistent patterns across features
 - Built-in debugging tools
 
-### 5. **Local Storage Limitations**
+### 5. **Pagination Limitations**
+**Limitation**: No pagination implemented for product lists
+**Impact**:
+- All products loaded at once, potential performance issues with large datasets
+- Memory usage increases with product count
+**Future Solution**: Implement pagination with lazy loading
+
+### 6. **Local Storage Limitations**
 **Limitation**: SharedPreferences has size limits
 **Mitigation**:
 - Efficient JSON serialization
