@@ -118,6 +118,12 @@ class Cart with _$Cart {
 - **Code Generation**: Freezed, JSON Serializable, Mockito, Build Runner
 - **Linting**: Flutter Lints with custom analysis rules
 
+## 🚀 CI/CD Pipeline
+
+- **Setup Job**: Environment configuration, dependency installation.
+- **Build Job**: Build checks by building both for iOS and Android 
+- **Test Job**: Runs flutter test
+
 ## ⚖️ Trade-offs and Limitations
 
 ### 1. **State Management Learning Curve**
@@ -134,7 +140,6 @@ class Cart with _$Cart {
 - **iOS**: Full support with proper navigation
 - **Android**: Full support with Material Design
 - **RTL Languages**: Arabic support with proper text direction
-- **Responsive Design**: Adapts to different screen sizes
 
 ---
 
