@@ -51,6 +51,29 @@ class CartItemWidget extends StatelessWidget {
   }
 
   Widget _buildProductImage() {
+    return _ProductImageWidget(item: item);
+  }
+
+  Widget _buildProductDetails() {
+    return _ProductDetailsWidget(item: item);
+  }
+
+  Widget _buildQuantityControls(BuildContext context) {
+    return _QuantityControlsWidget(item: item);
+  }
+
+  Widget _buildDeleteButton(BuildContext context) {
+    return _DeleteButtonWidget(item: item);
+  }
+}
+
+class _ProductImageWidget extends StatelessWidget {
+  final CartItem item;
+
+  const _ProductImageWidget({required this.item});
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       width: 80,
       height: 80,
@@ -64,14 +87,19 @@ class CartItemWidget extends StatelessWidget {
             ? Image.network(
                 item.product.image!,
                 fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => _buildPlaceholderImage(),
+                errorBuilder: (context, error, stackTrace) => _PlaceholderImageWidget(),
               )
-            : _buildPlaceholderImage(),
+            : _PlaceholderImageWidget(),
       ),
     );
   }
+}
 
-  Widget _buildPlaceholderImage() {
+class _PlaceholderImageWidget extends StatelessWidget {
+  const _PlaceholderImageWidget();
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       color: Colors.grey[200],
       child: Icon(
@@ -81,8 +109,15 @@ class CartItemWidget extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildProductDetails() {
+class _ProductDetailsWidget extends StatelessWidget {
+  final CartItem item;
+
+  const _ProductDetailsWidget({required this.item});
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -121,12 +156,19 @@ class CartItemWidget extends StatelessWidget {
       ],
     );
   }
+}
 
-  Widget _buildQuantityControls(BuildContext context) {
+class _QuantityControlsWidget extends StatelessWidget {
+  final CartItem item;
+
+  const _QuantityControlsWidget({required this.item});
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: [
         // Decrease Button
-        _buildQuantityButton(
+        _QuantityButtonWidget(
           icon: Icons.remove,
           onPressed: () {
             context.read<CartBloc>().add(
@@ -154,7 +196,7 @@ class CartItemWidget extends StatelessWidget {
         const SizedBox(width: Dimensions.dp8),
         
         // Increase Button
-        _buildQuantityButton(
+        _QuantityButtonWidget(
           icon: Icons.add,
           onPressed: () {
             context.read<CartBloc>().add(
@@ -165,11 +207,19 @@ class CartItemWidget extends StatelessWidget {
       ],
     );
   }
+}
 
-  Widget _buildQuantityButton({
-    required IconData icon,
-    required VoidCallback onPressed,
-  }) {
+class _QuantityButtonWidget extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback onPressed;
+
+  const _QuantityButtonWidget({
+    required this.icon,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
@@ -187,8 +237,15 @@ class CartItemWidget extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildDeleteButton(BuildContext context) {
+class _DeleteButtonWidget extends StatelessWidget {
+  final CartItem item;
+
+  const _DeleteButtonWidget({required this.item});
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         context.read<CartBloc>().add(
