@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:holo_shop/core/design_system/atoms/dimensions.dart';
 import 'package:holo_shop/features/cart/presentation/widgets/view_cart_button.dart';
+import 'package:holo_shop/shared/widgets/language_switcher_widget.dart';
 
 import '../../generated/l10n.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final bool showBackButton;
   final bool showViewCartButton;
+  final Function(Locale)? onLanguageChanged;
 
   const AppBarWidget({
     super.key,
     this.showBackButton = false,
     this.showViewCartButton = true,
+    this.onLanguageChanged,
   });
 
   @override
@@ -31,8 +34,10 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 if (showBackButton)
                   GestureDetector(
                     onTap: () => Navigator.of(context).maybePop(),
-                    child: const Icon(
-                      Icons.arrow_back,
+                    child: Icon(
+                      Directionality.of(context) == TextDirection.rtl
+                          ? Icons.arrow_forward_ios
+                          : Icons.arrow_back_ios,
                       size: 24,
                       color: Colors.black,
                     ),
@@ -65,7 +70,15 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ],
             ),
-            if (showViewCartButton) ViewCartButton(),
+            Row(
+              children: [
+                if (onLanguageChanged != null) ...[
+                  LanguageSwitcher(onLanguageChanged: onLanguageChanged!),
+                  SizedBox(width: Dimensions.dp8),
+                ],
+                if (showViewCartButton) ViewCartButton(),
+              ],
+            ),
           ],
         ),
       ),
