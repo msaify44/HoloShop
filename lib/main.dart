@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:holo_shop/core/di/injection_container.dart';
 import 'package:holo_shop/features/cart/presentation/bloc/cart_bloc.dart';
-import 'package:holo_shop/features/product_listing/presentation/widgets/products_listing_screen.dart';
+import 'package:holo_shop/features/product_listing/presentation/screens/products_listing_screen.dart';
 
 import 'generated/l10n.dart';
 
